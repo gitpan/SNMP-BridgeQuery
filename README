@@ -1,0 +1,13 @@
+BridgeQuery polls a device which respond to SNMP Bridge Table
+queries and generates a hash reference with each polled MAC
+address as the key and the associated port as the value.  The
+specific MIBs that are polled are described in RFC1493.
+
+SNMP::BridgeQuery requires Net::SNMP in order to function.
+
+Devices can be switches, bridges, or most anything that responds
+as a OSI Layer 2 component.  Layer 3 devices do not generally
+respond and will cause an error.  If an error is generated, it will
+return a hash reference with a single element ('error') which
+can be tested for.
+
