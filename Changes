@@ -1,5 +1,8 @@
 Revision history for Perl extension SNMP::BridgeQuery.
 
+0.57  Added 'queryat' to be able to get information 
+      the Address Translation Table of layer 3 switches
+
 0.56  Changed namespace to SNMP::BridgeQuery
 
 0.55  Added better error handling for devices that
