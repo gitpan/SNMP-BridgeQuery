@@ -8,7 +8,7 @@ require Exporter;
 @ISA 		= qw(Exporter);
 @EXPORT 	= qw(queryfdb);
 @EXPORT_OK	= qw(querymacs queryports queryat);
-$VERSION	= 0.58;
+$VERSION	= 0.59;
 
 use Net::SNMP;
 
@@ -17,8 +17,10 @@ my ($session);
 sub connect {
    my %cla = @_;
    $cla{comm} = "public" unless exists $cla{comm};
-   $session = Net::SNMP->session(Hostname  => $cla{host},
-                                 Community => $cla{comm});
+   $session = Net::SNMP->session(-hostname  => $cla{host},
+                                 -community => $cla{comm},
+                                 -translate => [-octetstring => 0x0],
+                                 );
 }
 
 sub queryat {
@@ -50,8 +52,8 @@ sub queryat {
    }
 
    foreach $key (keys %{$physref}) {
-      next if (length($physref->{$key}) < 14);
-      $physref->{$key} =~ s/0x//;
+      $physref->{$key} = unpack('H12', $physref->{$key});
+      next if (length($physref->{$key}) < 12);
       ($newkey = $key) =~ s/$physoid//;
       $final{$physref->{$key}} = 
          $addrref->{$addroid . $newkey} . "|" .
@@ -87,8 +89,8 @@ sub queryfdb {
    }
 
    foreach $key (keys %{$macref}) {
-      next if (length($macref->{$key}) < 14);
-      $macref->{$key} =~ s/0x//;
+      $macref->{$key} = unpack('H12', $macref->{$key});
+      next if (length($macref->{$key}) < 12);
       ($newkey = $key) =~ s/$macoid\.//;
       $final{$macref->{$key}} = $port{$newkey}
    }
@@ -109,9 +111,8 @@ sub querymacs {
    }
 
    foreach $key (keys %{$macref}) {
-      $macref->{$key} =~ s/0x//;
       ($newkey = $key ) =~ s/$macoid\.//;
-      next if (length($macref->{$key}) < 12);
+      $macref->{$key} = unpack('H12', $macref->{$key});
       $mac{$newkey} = sprintf("%12s", $macref->{$key});
    }
 

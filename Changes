@@ -1,5 +1,8 @@
 Revision history for Perl extension SNMP::BridgeQuery.
 
+0.59  Fixed problem where some mac addresses were being
+      'translated' into ASCII equivs
+
 0.57  Added 'queryat' to be able to get information 
       the Address Translation Table of layer 3 switches
 
