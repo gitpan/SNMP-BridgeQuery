@@ -1,5 +1,7 @@
 Revision history for Perl extension SNMP::BridgeQuery.
 
+0.60  Little fixes to satisfy the Perl Testers...
+
 0.59  Fixed problem where some mac addresses were being
       'translated' into ASCII equivs
 

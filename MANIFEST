@@ -1,8 +1,10 @@
 BridgeQuery.pm
 Changes
+LICENSE
 Makefile.PL
 MANIFEST
 README
 INSTALL
 TODO
 test.pl
+META.yml                                 Module meta-data (added by MakeMaker)

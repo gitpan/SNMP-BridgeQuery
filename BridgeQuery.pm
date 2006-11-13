@@ -8,7 +8,7 @@ require Exporter;
 @ISA 		= qw(Exporter);
 @EXPORT 	= qw(queryfdb);
 @EXPORT_OK	= qw(querymacs queryports queryat);
-$VERSION	= 0.59;
+$VERSION	= 0.60;
 
 use Net::SNMP;
 
@@ -194,7 +194,7 @@ David M. Town - Author of Net::SNMP
 
 =head1 AUTHOR
 
-John D. Shearer <jds@jkshearer.com>
+John D. Shearer <bridgequery@netguy.org>
 
 =head1 SEE ALSO
 
